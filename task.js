@@ -8,6 +8,9 @@ import {galleryItems} from './app.js';
 // Очистка значения атрибута src элемента img.lightbox__image. Это необходимо для того, чтобы при следующем открытии модального окна, пока грузится изображение, мы не видели предыдущее.
 
 const createGalleryList = document.querySelector('.js-gallery')
+const createModalImg = document.querySelector('.js-lightbox')
+const lightboxImage = document.querySelector('.lightbox__image')
+const closeBtn = document.querySelector('[data-action="close-lightbox"]')
 
 //создание разметки галлереи
 const addGalleryEl = galleryItems.map(el => {
@@ -31,21 +34,41 @@ return addGalleryItem;
 })
 createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''))
 
-// делегиерование
 createGalleryList.addEventListener('click', onImageClick)
+
 function onImageClick(event) {
 if(event.target.nodeName !== 'IMG') {
     return
 }
-
-    console.log(event.target.nodeName);
+ else if(event.target.nodeName === 'IMG') {
+     event.preventDefault()
+createModalImg.classList.add('is-open')// добавление класса в div
+lightboxImage.src = event.target.getAttribute('data-source')// получение url большого изображения.
+lightboxImage.alt = event.target.alt
+console.log(event.target.nodeName)
 }
 
-// получение url большого изображения.
-//  window.location
+window.addEventListener("keydown", keyEscape)
 
 
-const createModalImg = document.querySelector('.js-lightbox')
-// добавление класса в div
-// createModalImg.classList.add('is-open')
- 
+
+function closeModalWindow() {
+    createModalImg.classList.remove('is-open')
+    lightboxImage.src =""
+    lightboxImage.alt =""
+
+    window.removeEventListener("keydown", keyEscape)
+ }
+
+function lightboxImage(event) {
+    if(event.target === event.currentTarget) {
+        closeModalWindow()
+    }
+}
+
+function keyEscape(event) {
+    if(event.code === "Escape") {
+        closeModalWindow()
+    }
+}
+
