@@ -75,18 +75,6 @@ function keyEscape(event) {
     if(event.code === "Escape") {
         closeModalWindow()
     }
-    else {
-      return
-    }
+    
 }
 
-window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowLeft") {
-    const onArrowLeft() => {
-      let i = +refs.
-    }
-  }
-  if (event.code === "ArrowRight") {
-    onArrowRight();
-  }
-});
