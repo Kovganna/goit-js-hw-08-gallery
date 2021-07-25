@@ -59,6 +59,7 @@ console.log(event.target.nodeName)
 else {
   return
 }
+window.removeEventListener("keydown", keyEscape)
 }
 
 
@@ -70,7 +71,7 @@ function closeModalWindow() {
     window.removeEventListener("keydown", keyEscape)
  }
 
- 
+
 
 function keyEscape(event) {
     if(event.code === "Escape") {
