@@ -49,20 +49,16 @@ refs.createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''))
 
 
 function onImageClick(event) {
-// if(event.target.nodeName !== 'IMG' || event.code !== "Enter") {
-//     return
-// }
-//  else
-  if(event.target.nodeName === 'IMG') {
+ if(event.target.nodeName === 'IMG') {
      event.preventDefault()
 refs.createModalImg.classList.add('is-open')// добавление класса в div
 refs.lightboxImage.src = event.target.getAttribute('data-source')// получение url большого изображения.
 refs.lightboxImage.alt = event.target.alt
 console.log(event.target.nodeName)
 }
-
-window.addEventListener("keydown", keyEscape)
- 
+else {
+  return
+}
 }
 
 
@@ -73,6 +69,8 @@ function closeModalWindow() {
 
     window.removeEventListener("keydown", keyEscape)
  }
+
+ 
 
 function keyEscape(event) {
     if(event.code === "Escape") {
