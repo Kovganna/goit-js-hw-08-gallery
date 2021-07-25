@@ -63,12 +63,20 @@ else {
 window.addEventListener('keydown', keyEscape);
 }
 
+function keyEnterClick(event) {
+  if (event.code === "Enter" && event.target.nodeName === "A") {
+    refs.createModalImg.classList.add("is-open");
+    refs.lightboxImage.src = event.target.href;
+} 
+window.addEventListener('keydown', keyEnterClick)
+}
+
 function closeModalWindow() {
     refs.createModalImg.classList.remove('is-open');
     refs.lightboxImage.src ="#";
     refs.lightboxImage.alt ="#";
 
-    window.removeEventListener('keydown', keyEscape);
+    // window.removeEventListener('keydown', keyEscape);
  }
 
 function keyEscape(event) {
