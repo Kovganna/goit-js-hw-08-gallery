@@ -19,9 +19,9 @@ closeBtn: document.querySelector('[data-action="close-lightbox"]'),
 closeLightboxOverlay: document.querySelector('.lightbox__overlay'),
 }
 
-refs.createGalleryList.addEventListener('click', onImageClick)
-refs.closeBtn.addEventListener('click', closeModalWindow)
-refs.closeLightboxOverlay.addEventListener('click', closeModalWindow)
+refs.createGalleryList.addEventListener('click', onImageClick);
+refs.closeBtn.addEventListener('click', closeModalWindow);
+refs.closeLightboxOverlay.addEventListener('click', closeModalWindow);
 
 //создание карточки галлереи
 const addGalleryEl = galleryItems.map(el => {
@@ -39,82 +39,54 @@ const addGalleryEl = galleryItems.map(el => {
       alt="${el.description}"
     />
   </a>
-</li>`
+</li>`;
 
 return addGalleryItem;
 })
-refs.createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''))
+refs.createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''));
 
 
 
 
 function onImageClick(event) {
  if(event.target.nodeName === 'IMG') {
-     event.preventDefault()
-refs.createModalImg.classList.add('is-open')// добавление класса в div
-refs.lightboxImage.src = event.target.getAttribute('data-source')// получение url большого изображения.
-refs.lightboxImage.alt = event.target.alt
-console.log(event.target.nodeName)
+     event.preventDefault();
+refs.createModalImg.classList.add('is-open');// добавление класса в div
+refs.lightboxImage.src = event.target.dataset.source;// получение url большого изображения.
+refs.lightboxImage.alt = event.target.alt;
+refs.lightboxImage.dataset.index = event.target.dataset.index;
+// console.log(event.target.nodeName)
 }
 else {
-  return
+  return;
 }
-window.removeEventListener("keydown", keyEscape)
+window.addEventListener('keydown', keyEscape);
 }
-
 
 function closeModalWindow() {
-    refs.createModalImg.classList.remove('is-open')
-    refs.lightboxImage.src ="#"
-    refs.lightboxImage.alt ="#"
+    refs.createModalImg.classList.remove('is-open');
+    refs.lightboxImage.src ="#";
+    refs.lightboxImage.alt ="#";
 
-    window.removeEventListener("keydown", keyEscape)
+    window.removeEventListener('keydown', keyEscape);
  }
-
-
 
 function keyEscape(event) {
     if(event.code === "Escape") {
         closeModalWindow()
     }
+    else {
+      return
+    }
 }
 
-// function keyEnter(e) {
-//   // event.preventDefault()
-//   // if(event.code === "Enter") {
-//   //   onImageClick()
- 
-//   }
-
-
-
-// window.addEventListener("keydown", (event) => {
-//   if (event.code === "ArrowLeft") {
-//     onArrowLeft();
-//   }
-//   if (event.code === "ArrowRight") {
-//     onArrowRight();
-//   }
-// });
-
-// function onArrowLeft() {
-//   let index = +refs.lightboxImage.dataset.index;
-//   if (index === 0) {
-//     step(galleryItems.length - 1);
-//     return;
-//   }
-//   step(index, -1);
-// }
-// function onArrowRight() {
-//   let index = +refs.lightboxImage.dataset.index;
-//   if (index === galleryItems.length - 1) {
-//     step(0);
-//     return;
-//   }
-//   step(index, 1);
-// }
-
-// function step(index, step = 0) {
-//   refs.lightboxImage.dataset.index = `${index + step}`;
-//   refs.lightboxImage.src = galleryItems[index + step].original;
-// }
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowLeft") {
+    const onArrowLeft() => {
+      let i = +refs.
+    }
+  }
+  if (event.code === "ArrowRight") {
+    onArrowRight();
+  }
+});
