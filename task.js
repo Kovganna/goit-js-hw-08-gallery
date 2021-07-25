@@ -7,14 +7,23 @@ import {galleryItems} from './app.js';
 // Закрытие модального окна по клику на кнопку button[data-action="close-lightbox"].
 // Очистка значения атрибута src элемента img.lightbox__image. Это необходимо для того, чтобы при следующем открытии модального окна, пока грузится изображение, мы не видели предыдущее.
 
+// Закрытие модального окна по клику на div.lightbox__overlay.
+// Закрытие модального окна по нажатию клавиши ESC.
+// Пролистывание изображений галереи в открытом модальном окне клавишами "влево" и "вправо".
+
 const refs = { 
 createGalleryList: document.querySelector('.js-gallery'),
 createModalImg: document.querySelector('.js-lightbox'),
 lightboxImage: document.querySelector('.lightbox__image'),
 closeBtn: document.querySelector('[data-action="close-lightbox"]'),
+closeLightboxOverlay: document.querySelector('.lightbox__overlay'),
 }
 
-//создание разметки галлереи
+refs.createGalleryList.addEventListener('click', onImageClick)
+refs.closeBtn.addEventListener('click', closeModalWindow)
+refs.closeLightboxOverlay.addEventListener('click', closeModalWindow)
+
+//создание карточки галлереи
 const addGalleryEl = galleryItems.map(el => {
 
     const addGalleryItem = 
@@ -37,7 +46,7 @@ return addGalleryItem;
 refs.createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''))
 
 
-refs.createGalleryList.addEventListener('click', onImageClick)
+
 
 function onImageClick(event) {
 if(event.target.nodeName !== 'IMG') {
@@ -51,27 +60,30 @@ refs.lightboxImage.alt = event.target.alt
 console.log(event.target.nodeName)
 }
 
-window.addEventListener("keydown", keyEscape)
+window.addEventListener("click", keyEnter)
+ 
 }
 
 
 function closeModalWindow() {
     refs.createModalImg.classList.remove('is-open')
-    refs.lightboxImage.src =""
-    refs.lightboxImage.alt =""
+    refs.lightboxImage.src ="#"
+    refs.lightboxImage.alt ="#"
 
     window.removeEventListener("keydown", keyEscape)
  }
-
-function lightboxImage(event) {
-    if(event.target === event.currentTarget) {
-        closeModalWindow()
-    }
-}
 
 function keyEscape(event) {
     if(event.code === "Escape") {
         closeModalWindow()
     }
 }
+
+function keyEnter(e) {
+  // event.preventDefault()
+  // if(event.code === "Enter") {
+  //   onImageClick()
+   console.log('key', e.key); 
+  }
+
 
