@@ -49,10 +49,11 @@ refs.createGalleryList.insertAdjacentHTML("beforeend", addGalleryEl.join(''))
 
 
 function onImageClick(event) {
-if(event.target.nodeName !== 'IMG') {
-    return
-}
- else if(event.target.nodeName === 'IMG') {
+// if(event.target.nodeName !== 'IMG' || event.code !== "Enter") {
+//     return
+// }
+//  else
+  if(event.code === "Enter" || event.target.nodeName === 'IMG') {
      event.preventDefault()
 refs.createModalImg.classList.add('is-open')// добавление класса в div
 refs.lightboxImage.src = event.target.getAttribute('data-source')// получение url большого изображения.
@@ -60,7 +61,7 @@ refs.lightboxImage.alt = event.target.alt
 console.log(event.target.nodeName)
 }
 
-window.addEventListener("click", keyEnter)
+window.addEventListener("keydown", keyEscape)
  
 }
 
@@ -79,11 +80,42 @@ function keyEscape(event) {
     }
 }
 
-function keyEnter(e) {
-  // event.preventDefault()
-  // if(event.code === "Enter") {
-  //   onImageClick()
-   console.log('key', e.key); 
-  }
+// function keyEnter(e) {
+//   // event.preventDefault()
+//   // if(event.code === "Enter") {
+//   //   onImageClick()
+ 
+//   }
 
 
+
+// window.addEventListener("keydown", (event) => {
+//   if (event.code === "ArrowLeft") {
+//     onArrowLeft();
+//   }
+//   if (event.code === "ArrowRight") {
+//     onArrowRight();
+//   }
+// });
+
+// function onArrowLeft() {
+//   let index = +refs.lightboxImage.dataset.index;
+//   if (index === 0) {
+//     step(galleryItems.length - 1);
+//     return;
+//   }
+//   step(index, -1);
+// }
+// function onArrowRight() {
+//   let index = +refs.lightboxImage.dataset.index;
+//   if (index === galleryItems.length - 1) {
+//     step(0);
+//     return;
+//   }
+//   step(index, 1);
+// }
+
+// function step(index, step = 0) {
+//   refs.lightboxImage.dataset.index = `${index + step}`;
+//   refs.lightboxImage.src = galleryItems[index + step].original;
+// }
