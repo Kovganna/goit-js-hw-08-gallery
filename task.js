@@ -53,7 +53,7 @@ function onImageClick(event) {
 //     return
 // }
 //  else
-  if(event.code === "Enter" || event.target.nodeName === 'IMG') {
+  if(event.target.nodeName === 'IMG') {
      event.preventDefault()
 refs.createModalImg.classList.add('is-open')// добавление класса в div
 refs.lightboxImage.src = event.target.getAttribute('data-source')// получение url большого изображения.
